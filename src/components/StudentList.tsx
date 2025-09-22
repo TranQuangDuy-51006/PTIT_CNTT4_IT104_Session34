@@ -6,16 +6,22 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from '@mui/material';
+} from "@mui/material";
 
-import React from 'react';
-import type { Student } from '../utils/types';
+import React from "react";
+import type { Student } from "../utils/types";
 
 interface StudentListProps {
   students: Student[];
+  onEdit: (student: Student) => void;
+  onDelete: (id: string) => void;
 }
 
-const StudentList: React.FC<StudentListProps> = ({ students }) => {
+const StudentList: React.FC<StudentListProps> = ({
+  students,
+  onEdit,
+  onDelete,
+}) => {
   return (
     <TableContainer>
       <Table>
@@ -42,13 +48,17 @@ const StudentList: React.FC<StudentListProps> = ({ students }) => {
                   <Button variant="contained" color="error">
                     Xem
                   </Button>
-                  <Button variant="contained" color="warning">
+                  <Button
+                    variant="contained"
+                    color="warning"
+                    onClick={() => onEdit(s)}
+                  >
                     Sửa
                   </Button>
                   <Button
                     variant="contained"
                     color="success"
-                    onClick={() => confirm('Bạn có chắc chắn muốn xóa không')}
+                    onClick={() => onDelete(s.id)}
                   >
                     Xóa
                   </Button>
